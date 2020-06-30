@@ -1,9 +1,26 @@
 #include <Arduino.h>
+#include <Wire.h>
+#include "CAN_r.h"
 
-void setup() {
-  // put your setup code here, to run once:
+byte x = 0;
+CAN_r Com;
+bool Timeout;
+
+void setup()
+{
+  Serial.begin(9600);           // start serial for output
+  Com.Init_Slave();
+  delay(900);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop()
+{
+  
+  Com.End_Slave();
+  Com.Init_Master();
+  Com.T_Master(x++);
+  Com.End_Master();
+  Com.Init_Slave();  
+  delay(900);
 }
+
