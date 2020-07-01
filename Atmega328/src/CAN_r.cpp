@@ -17,7 +17,7 @@ void CAN_r::Init_Master(){
 void CAN_r::T_Master(uint8_t x)
 {
   Wire.beginTransmission(10); // transmit to device #4
-  Wire.write("x is ");        // sends five bytes
+  Wire.write("y is ");        // sends five bytes
   Wire.write(x);              // sends one byte  
   Wire.endTransmission();    // stop transmitting
   x++;
@@ -38,11 +38,13 @@ void CAN_r::End_Slave(){
 
 void receiveEvent(int howMany)
 {
-  while(1 < Wire.available()) // loop through all but the last
+  while(Wire.available()) // loop through all but the last
   {
-    char c = Wire.read();    // receive byte as a character
-    Serial.print(c);         // print the character
+    int x = Wire.read();    // receive byte as an integer
+    Serial.print(x);
+    Serial.print(" ");
   }
-  int x = Wire.read();    // receive byte as an integer
-  Serial.println(x);         // print the integer
+  Serial.println("");
+
+           // print the integer
 } 

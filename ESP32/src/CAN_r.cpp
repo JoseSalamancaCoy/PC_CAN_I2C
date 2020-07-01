@@ -1,8 +1,8 @@
 #include "CAN_r.h"
 
-CAN_r::CAN_r(/* args */)
+CAN_r::CAN_r()
 {
-
+  Wire.begin(); // join i2c bus (address optional for master)
 }
 
 CAN_r::~CAN_r()
@@ -10,17 +10,26 @@ CAN_r::~CAN_r()
 
 }
 
+void CAN_r::send(uint8_t x)
+{
+  //T_Master(x);
+  set_Pack(x);
+  Wire.beginTransmission(4); // transmit to device #4
+  Wire.write(&PackDato._uint8._init, 7 ) ;         // sends one byte  
+  Wire.endTransmission();    // stop transmitting
+}
+
+
 void CAN_r::Init_Master(){
-  Wire.begin(); // join i2c bus (address optional for master)
+  
 }
 
 void CAN_r::T_Master(uint8_t x)
 {
-  Wire.beginTransmission(10); // transmit to device #4
+  Wire.beginTransmission(4); // transmit to device #4
   Wire.write("x is ");        // sends five bytes
-  Wire.write(x);              // sends one byte  
+  Wire.write(x);             // sends one byte  
   Wire.endTransmission();    // stop transmitting
-  x++;
 }
 
 void CAN_r::End_Master(){
@@ -28,8 +37,7 @@ void CAN_r::End_Master(){
 }
 
 void CAN_r::Init_Slave(){
-  Wire.begin(4);                // join i2c bus with address #4
-  Wire.onReceive(receiveEvent); // register event
+  Wire.begin();                // join i2c bus with address #4
 }
 
 void CAN_r::End_Slave(){

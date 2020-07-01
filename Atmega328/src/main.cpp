@@ -10,14 +10,15 @@ bool Timeout;
 
 void IRQ_interrup(){
     Timeout = true;
-    Serial.println("ok");
+
 }
 
 void setup()
 {
   Serial.begin(9600);           // start serial for output
+  Serial.println("Init atmega328");
   Com.Init_Slave();
-  Timer1.initialize(1000);
+  Timer1.initialize(1000000);
   Timer1.attachInterrupt(IRQ_interrup);
 }
 
@@ -31,5 +32,7 @@ void loop()
     Com.End_Master();
     Com.Init_Slave();
   }
+   //if(Timeout){Timeout = false; Serial.println("ok");} 
+
   delay(10);
 }
