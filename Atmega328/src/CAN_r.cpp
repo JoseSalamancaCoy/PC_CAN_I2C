@@ -40,7 +40,7 @@ void receiveEvent(int howMany)
 {
   while(Wire.available()) // loop through all but the last
   {
-    int x = Wire.read();    // receive byte as an integer
+    uint8_t x = Wire.read();    // receive byte as an integer
     Serial.print(x);
     Serial.print(" ");
   }

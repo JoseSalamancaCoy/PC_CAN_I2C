@@ -93,99 +93,87 @@ private:
     };
     struct _tag_uint8_t{
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        uint8_t _lengt;
         uint8_t _data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
     };
     struct _tag_uint16_t{
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        uint8_t _lengt;
         uint16_t _data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
     };        
     struct _tag_uint32_t{
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        uint8_t _lengt;
         uint32_t _data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
     };
     struct _tag_uint64_t{
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        uint8_t _lengt;
         uint64_t _data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
     };     
     struct _tag_float {
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        uint8_t _lengt;
         float _data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
     };
     struct _tag_double {
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        uint8_t _lengt;
         uint64_t _data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
     };
     struct _tag_char {
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        char *_lengt;
-        uint64_t _data;
+        char  *_data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
     };
     struct _tag_Data {
         uint8_t _init = byte_init_data;
+        uint8_t _lengt;
         uint8_t _id;
         uint8_t _type;
-        uint8_t _lengt;
         _Medicion _data;
         uint8_t _crc;
         uint8_t _end = byte_end_data;
-    };
-    struct Dato{
-        type_dato tipo;
-        _tag_uint8_t _uint8;
-        _tag_uint16_t _uint16;
-        _tag_uint32_t _uint32;
-        _tag_uint64_t _uint64;
-        _tag_float _float;
-        _tag_double _double;
-        _tag_char _char;
-        _tag_Data _Data;        
     };
     uint8_t _id;
 public:
     Pack_CAN_r();
     ~Pack_CAN_r();
     void begin(uint8_t id);
-    void set_Pack(uint8_t val);
-    /*void set_Pack(uint16_t val);
-    void set_Pack(uint32_t val);
-    void set_Pack(uint64_t val);
-    void set_Pack(float val);
-    void set_Pack(double val);
-    void set_Pack(float mean, float max, float min, float desv);*/
+    uint8_t set_Pack(uint8_t val, uint8_t *pack);
+    uint8_t set_Pack(uint16_t val, uint8_t *pack);
+    uint8_t set_Pack(uint32_t val, uint8_t *pack);
+    uint8_t set_Pack(uint64_t val, uint8_t *pack);
+    uint8_t set_Pack(float val, uint8_t *pack);
+    uint8_t set_Pack(double val, uint8_t *pack);
+    uint8_t set_Pack(float mean, float max, float min, float desv, uint8_t *pack);
     uint8_t crc(uint8_t *val,uint8_t length);
-    Dato PackDato;
 };

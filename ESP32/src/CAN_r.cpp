@@ -10,15 +10,17 @@ CAN_r::~CAN_r()
 
 }
 
-void CAN_r::send(uint8_t x)
+/*void CAN_r::send(uint8_t x)
 {
-  //T_Master(x);
-  set_Pack(x);
+  len = set_Pack(x, &Pack[0]);
   Wire.beginTransmission(4); // transmit to device #4
-  Wire.write(&PackDato._uint8._init, 7 ) ;         // sends one byte  
+  Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
-}
+  //for(int i =0 ; i<7 ; i++) Serial.print(Pack[i]);
+  Serial.println("");
+}*/
 
+void CAN
 
 void CAN_r::Init_Master(){
   
