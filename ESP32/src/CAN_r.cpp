@@ -16,24 +16,46 @@ void CAN_r::send(uint8_t val)
   Wire.beginTransmission(4); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
-  //for(int i =0 ; i<7 ; i++) Serial.print(Pack[i]);
   Serial.println("");
 }
 
-void CAN_r::send(uint16_t val){}
+void CAN_r::send(uint16_t val){
+  len = set_Pack(val, &Pack[0]);
+  Wire.beginTransmission(4); // transmit to device #4
+  Wire.write(&Pack[0], len) ;         // sends one byte  
+  Wire.endTransmission();    // stop transmitting
+  Serial.println("");
+}
 
-void CAN_r::send(uint32_t val){}
+void CAN_r::send(uint32_t val){
+  len = set_Pack(val, &Pack[0]);
+  Wire.beginTransmission(4); // transmit to device #4
+  Wire.write(&Pack[0], len) ;         // sends one byte  
+  Wire.endTransmission();    // stop transmitting
+  Serial.println("");
+}
 
-void CAN_r::send(uint64_t val){}
+void CAN_r::send(uint64_t val){
+  len = set_Pack(val, &Pack[0]);
+  Wire.beginTransmission(4); // transmit to device #4
+  Wire.write(&Pack[0], len) ;         // sends one byte  
+  Wire.endTransmission();    // stop transmitting
+  Serial.println("");
+}
 
-void CAN_r::send(float val){}
+void CAN_r::send(float val){
+  len = set_Pack(val, &Pack[0]);
+  Wire.beginTransmission(4); // transmit to device #4
+  Wire.write(&Pack[0], len) ;         // sends one byte  
+  Wire.endTransmission();    // stop transmitting
+  Serial.println("");
+}
 
 void CAN_r::send(float mean, float max, float min, float desv){
   len = set_Pack(mean,max,min,desv, &Pack[0]);
   Wire.beginTransmission(4); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
-  //for(int i =0 ; i<7 ; i++) Serial.print(Pack[i]);
   Serial.println("");
 }
 void CAN_r::Init_Master(){

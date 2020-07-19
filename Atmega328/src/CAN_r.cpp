@@ -38,13 +38,16 @@ void CAN_r::End_Slave(){
 
 void receiveEvent(int howMany)
 {
+  uint8_t len=0;
   while(Wire.available()) // loop through all but the last
   {
     uint8_t x = Wire.read();    // receive byte as an integer
     Serial.print(x);
     Serial.print(" ");
+    len++;
   }
-  Serial.println("");
+  Serial.print("      * ");
+  Serial.println(len);
 
            // print the integer
 } 
