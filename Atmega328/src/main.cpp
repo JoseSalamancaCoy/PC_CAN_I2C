@@ -17,6 +17,7 @@ void setup()
 {
   Serial.begin(9600);           // start serial for output
   Serial.println("Init atmega328");
+  Com.begin(5);
   Com.Init_Slave();
   Timer1.initialize(1000000);
   Timer1.attachInterrupt(IRQ_interrup);
@@ -28,7 +29,6 @@ void loop()
     Timeout = false;
     Com.End_Slave();
     Com.Init_Master();
-    Com.T_Master(x++);
     Com.End_Master();
     Com.Init_Slave();
   }
