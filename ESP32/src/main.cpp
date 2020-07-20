@@ -21,7 +21,7 @@ void setup()
 
 void loop()
 {
-  Com.send(10.5,11.2,0.1001,0.001);
+  Com.send(10.5,11.2,0.12,0.001);
   delay(900);
   digitalWrite(25, !digitalRead(25));
   x++;

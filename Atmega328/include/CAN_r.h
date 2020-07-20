@@ -5,18 +5,20 @@
 
 #define _port_I2C 4
 
-void receiveEvent(int howMany);
 
 class CAN_r: public Pack_CAN_r
 {
 private: 
+    static uint8_t Pack_t[255];
 
-    uint8_t Pack[150];
     uint8_t len;
-    
+    //void static receiveEvent(int howMany);
+
+
 public:
     CAN_r(/* args */);
     ~CAN_r();
+
     void send(uint8_t val);
     void send(uint16_t val);
     void send(uint32_t val);
@@ -28,8 +30,10 @@ public:
     
     void Init_Master();
     void End_Master();
-    void Init_Slave();
     void End_Slave();  
+    void static Init_Slave(void (*function)(int));
+
+
 
 
 };
