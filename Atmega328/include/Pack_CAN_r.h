@@ -27,7 +27,7 @@ class Pack_CAN_r
         uint8_t set_Pack(_Medicion val, uint8_t *pack);
 
 
-        _Medicion Get_Medicion(uint8_t *data, uint8_t length);
+        bool Get_Medicion(uint8_t *trama, _Medicion *data, uint8_t length);
 
         uint8_t crc(uint8_t *val,uint8_t length);
 
