@@ -33,6 +33,11 @@ TwoWireSlave::~TwoWireSlave()
     i2c_driver_delete(portNum);
 }
 
+void TwoWireSlave::loose(){
+    flush();
+    i2c_driver_delete(portNum);
+}
+
 
 bool TwoWireSlave::begin(int sda, int scl, int address)
 {
@@ -69,15 +74,22 @@ void TwoWireSlave::update()
 {
     uint8_t inputBuffer[I2C_BUFFER_LENGTH] = {0};
     uint16_t inputLen = 0;
-
-    inputLen = i2c_slave_read_buffer(portNum, inputBuffer, I2C_BUFFER_LENGTH, 0);
     
+    inputLen = i2c_slave_read_buffer(portNum, inputBuffer, I2C_BUFFER_LENGTH, 0);
     if (inputLen == 0) {
         // nothing received
         return;
     }
+    rxIndex=0;
+    // transfer bytes from packet to rxBuffer
+    while(rxIndex<inputLen){
+        rxBuffer[rxIndex] = inputBuffer[rxIndex];
+        rxIndex++;
+    }
+    rxLength = inputLen;
+    rxIndex=0;
     if (user_onReceive) {
-        user_onReceive(inputLen);
+        user_onReceive(rxLength);
     }
 }
 
@@ -114,6 +126,7 @@ int TwoWireSlave::read(void)
         value = rxBuffer[rxIndex];
         ++rxIndex;
     }
+    else {rxLength=0; rxIndex=0;}
     return value;
 }
 

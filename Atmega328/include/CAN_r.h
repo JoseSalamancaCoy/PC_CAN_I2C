@@ -9,7 +9,7 @@
 class CAN_r: public Pack_CAN_r
 {
 private: 
-    static uint8_t Pack_t[255];
+    uint8_t Pack[255];
 
     uint8_t len;
     //void static receiveEvent(int howMany);

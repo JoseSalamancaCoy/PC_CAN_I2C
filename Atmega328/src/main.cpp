@@ -3,7 +3,7 @@
 #include "CAN_r.h"
 #include <TimerOne.h>
 
-byte x = 0;
+float x = 0;
 CAN_r Com;
 bool Timeout;
 
@@ -21,7 +21,7 @@ void setup()
   Serial.println("Init atmega328");
   Com.begin(5);
   Com.Init_Slave(receiveEvent);
-  Timer1.initialize(1000000);
+  Timer1.initialize(100000);
   Timer1.attachInterrupt(IRQ_interrup);
 }
 
@@ -31,6 +31,9 @@ void loop()
     Timeout = false;
     Com.End_Slave();
     Com.Init_Master();
+    x+=0.001;
+    Com.send(x,11.2,0.12,0.001);
+    Serial.println(x,4);
     Com.End_Master();
     Com.Init_Slave(receiveEvent);
   }

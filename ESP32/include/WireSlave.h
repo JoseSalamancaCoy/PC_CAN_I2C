@@ -34,6 +34,8 @@ class TwoWireSlave : public Stream
 public:
     TwoWireSlave(uint8_t bus_num);
     ~TwoWireSlave();
+    
+    void loose();
 
     bool begin(int sda, int scl, int address);
     void update();
