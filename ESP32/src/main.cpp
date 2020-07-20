@@ -3,9 +3,11 @@
 #include "WireSlave.h"
 #include "CAN_r.h"
 
+
 CAN_r Com;
 uint8_t Pack[150];
 
+void static ReceiveData(_Medicion);
 
 static void LedBlink(void * parameter){
   pinMode(25,OUTPUT);
@@ -19,17 +21,15 @@ static void LedBlink(void * parameter){
 static void Comunication(void * parameter){
   Serial.println("Comunicacion");
   Com.begin(3);
+  Com.onReceive(ReceiveData);
   Com.Init_Slave();
   vTaskDelay(250); 
   for(;;){
-    //Serial.println("fin slave");
-    //Com.End_Slave();
-    //Serial.println("init Master");
-    //Com.Init_Master();  
-    //Serial.println("Envio  .. ");
-    //Com.send(10.5,11.2,0.12,0.001);
-    //Com.End_Master();
-    //Com.Init_Slave(receiveEvent);
+    Com.End_Slave();
+    Com.Init_Master();  
+    Com.send(10.5,11.2,0.12,0.001);
+    Com.End_Master();
+    Com.Init_Slave();
     Com.Update();
     vTaskDelay(100); 
   }
@@ -47,6 +47,12 @@ void setup()
 void loop()
 {  
 }
+
+void ReceiveData(_Medicion Data){
+  Serial.print("Mean =   "); Serial.println(Data.mean,4);
+}
+
+
 
 
 

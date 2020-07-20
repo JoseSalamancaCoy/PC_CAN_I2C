@@ -21,7 +21,7 @@ void setup()
   Serial.println("Init atmega328");
   Com.begin(5);
   Com.Init_Slave(receiveEvent);
-  Timer1.initialize(100000);
+  Timer1.initialize(2000000);
   Timer1.attachInterrupt(IRQ_interrup);
 }
 
