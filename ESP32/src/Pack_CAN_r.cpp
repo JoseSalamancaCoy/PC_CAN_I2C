@@ -148,3 +148,20 @@ uint8_t Pack_CAN_r::set_Pack(_Medicion val, uint8_t *pack){
     for(int i =0; i<trama._lengt;i++) *pack++ =*_pack++; //Copia datos en puntero externo
     return trama._lengt; // Retorna la longitud del vector
 }
+
+ bool Pack_CAN_r::Get_Medicion(uint8_t *_trama, _Medicion *data, uint8_t lengt){
+    _tag_Data trama;
+    uint8_t *_pinit = _trama;
+    uint8_t *_pack;
+
+    _pack= &trama._init;
+    for(int i =0; i<lengt;i++) *_pack++ =*_trama++; //Copia datos de puntero externo en puntero a trama de datos
+
+    if(trama._crc == crc(_pinit,lengt-2)){
+        *data = trama._data;
+        return true;
+    }
+    else{
+        return false;
+    }
+}

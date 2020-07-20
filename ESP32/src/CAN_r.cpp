@@ -2,7 +2,6 @@
 
 CAN_r::CAN_r()
 {
-  Wire.begin(); // join i2c bus (address optional for master)
 }
 
 CAN_r::~CAN_r()
@@ -69,28 +68,25 @@ void CAN_r::send(_Medicion val){
 
 
 void CAN_r::Init_Master(){
-  
+  Wire.begin();  //i2c master init
 }
 
 void CAN_r::End_Master(){
-  //delete Wire;
+  Wire.flush();
 }
 
-void CAN_r::Init_Slave(){
-  Wire.begin();                // join i2c bus with address #4
+void CAN_r::Init_Slave(void (*function)(int)){
+  bool success = WireSlave.begin(SDA_PIN, SCL_PIN, _port_I2C);
+  if (!success) {
+      Serial.println("I2C slave init failed");
+      while(1) delay(100);
+  }
+  WireSlave.onReceive(function);
 }
 
 void CAN_r::End_Slave(){
-  //Wire.end();
+  WireSlave.update();
+  WireSlave.flush();
 }
 
-void receiveEvent(int howMany)
-{
-  while(1 < Wire.available()) // loop through all but the last
-  {
-    char c = Wire.read();    // receive byte as a character
-    Serial.print(c);         // print the character
-  }
-  int x = Wire.read();    // receive byte as an integer
-  Serial.println(x);         // print the integer
-} 
+

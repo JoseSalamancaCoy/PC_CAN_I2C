@@ -1,18 +1,18 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include "WireSlave.h"
 #include "Pack_CAN_r.h"
 
 #define _port_I2C 4
 
-void receiveEvent(int howMany);
+#define SDA_PIN 21
+#define SCL_PIN 22
+
 
 class CAN_r : public Pack_CAN_r
 {
 private:
-    void Init_Master();
-    void End_Master();
-    void Init_Slave();
-    void End_Slave();
+    
     uint8_t Pack[150];
     uint8_t len;
 public:
@@ -26,7 +26,9 @@ public:
     void send(float mean, float max, float min, float desv);
     void send(_Medicion val);
 
-    void update();
-    void get();
+    void Init_Master();
+    void End_Master();
+    void static Init_Slave(void (*function)(int));
+    void End_Slave();
 };
 
