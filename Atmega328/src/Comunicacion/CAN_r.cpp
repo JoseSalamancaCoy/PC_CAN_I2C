@@ -9,11 +9,35 @@ CAN_r::~CAN_r()
 {
 
 }
+
+void CAN_r::Init_Slave(){
+  Wire.begin(_port_I2C);                // join i2c bus with address #4
+  Wire.onReceive(receiveEvent); // register event
+}
+
+void CAN_r::End_Slave(){
+  Wire.end();
+  
+}
+
+void CAN_r::Init_Master(){
+  Wire.begin(); // join i2c bus (address optional for master)
+}
+
+
+void CAN_r::End_Master(){
+  Wire.end();
+}
+
 void CAN_r::begin()
 {
   Init_Slave();
 }
 
+void CAN_r::end(){
+  End_Slave();
+  Wire.flush();
+}
 
 void CAN_r::send(uint8_t val, uint8_t id)
 {
@@ -100,29 +124,6 @@ void CAN_r::send(_Medicion val, uint8_t id){
   End_Master();
   Init_Slave();
 }
-
-void CAN_r::Init_Master(){
-  Wire.begin(); // join i2c bus (address optional for master)
-}
-
-
-void CAN_r::End_Master(){
-  Wire.end();
-}
-
-void CAN_r::Init_Slave(){
-  Wire.begin(_port_I2C);                // join i2c bus with address #4
-  Wire.onReceive(receiveEvent); // register event
-}
-
-void CAN_r::End_Slave(){
-  Wire.end();
-  
-}
-
-
-
-
 
 uint8_t CAN_r::ReadAll(uint8_t *_pack_r,uint8_t len){
   while(Wire.available()) // loop through all but the last

@@ -8,8 +8,37 @@ CAN_r::~CAN_r()
 {
 
 }
+
+void CAN_r::Init_Slave(){
+  bool success = WireSlave.begin(SDA_PIN, SCL_PIN, _port_I2C);
+  if (!success) {
+      Serial.println("I2C slave init failed");
+      while(1) delay(100);
+  }
+  WireSlave.onReceive(receiveEvent);
+}
+
+void CAN_r::End_Slave(){
+  WireSlave.update();
+  WireSlave.loose();
+}
+
+void CAN_r::Init_Master(){
+
+  Wire.begin();  //i2c master init
+}
+
+void CAN_r::End_Master(){
+  Wire.loose();
+}
+
 void CAN_r::begin(){
   Init_Slave();
+}
+
+void CAN_r::end(){
+  End_Slave();
+  WireSlave.flush();
 }
 
 void CAN_r::send(uint8_t val, uint8_t id){
@@ -103,36 +132,9 @@ void CAN_r::send(_Medicion val, uint8_t id){
   Init_Slave();
 }
 
-
-void CAN_r::End_Slave(){
-  WireSlave.update();
-  WireSlave.loose();
-}
-
-void CAN_r::Init_Master(){
-
-  Wire.begin();  //i2c master init
-}
-
-void CAN_r::End_Master(){
-  Wire.loose();
-}
 void CAN_r::Update(){
     WireSlave.update();
 }
-
-
-
-void CAN_r::Init_Slave(){
-  bool success = WireSlave.begin(SDA_PIN, SCL_PIN, _port_I2C);
-  if (!success) {
-      Serial.println("I2C slave init failed");
-      while(1) delay(100);
-  }
-  WireSlave.onReceive(receiveEvent);
-}
-
-
 
 uint8_t CAN_r::ReadAll(uint8_t *_pack_r,uint8_t len){
   while(WireSlave.available()) // loop through all but the last
