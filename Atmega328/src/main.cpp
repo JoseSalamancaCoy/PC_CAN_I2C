@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <Wire.h>
-#include "CAN_r.h"
+#include "Comunicacion/CAN_r.h"
+#include "Comunicacion/Common.h"
 #include <TimerOne.h>
-#include "Common.h"
 
 float x = 0;
 CAN_r Com;

@@ -1,8 +1,6 @@
 #include <Arduino.h>
-#include <Wire.h>
-#include "WireSlave.h"
-#include "CAN_r.h"
-#include "Common.h"
+#include "Comunicacion/CAN_r.h"
+#include "Comunicacion/Common.h"
 
 CAN_r Com;
 uint8_t Pack[150];

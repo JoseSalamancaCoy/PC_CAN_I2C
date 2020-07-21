@@ -1,4 +1,4 @@
-#include "Pack_CAN_r.h"
+#include "Comunicacion/Pack_CAN_r.h"
 
 Pack_CAN_r::Pack_CAN_r()
 {
@@ -36,6 +36,7 @@ uint8_t Pack_CAN_r::crc(uint8_t *data, uint8_t length) {
 
         return crc;
     }
+
 
 uint8_t Pack_CAN_r::set_Pack(uint8_t val, uint8_t *pack){ 
     // Se llena la trama para transmitir
@@ -149,9 +150,10 @@ uint8_t Pack_CAN_r::set_Pack(_Medicion val, uint8_t *pack){
     return trama._lengt; // Retorna la longitud del vector
 }
 
-void Pack_CAN_r::set_id(uint8_t id){
-    _id= id;
+uint8_t Pack_CAN_r::set_id(uint8_t id){
+    _id = id;
 }
+
 
  bool Pack_CAN_r::Get_Medicion(uint8_t *_trama, _Medicion *data, uint8_t lengt){
     _tag_Data trama;

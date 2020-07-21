@@ -1,4 +1,4 @@
-#include "CAN_r.h"
+#include "Comunicacion/CAN_r.h"
 
 CAN_r::CAN_r()
 {

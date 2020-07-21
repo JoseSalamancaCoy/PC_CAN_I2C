@@ -8,8 +8,7 @@
 
 #include <Arduino.h>
 #include <driver/i2c.h>
-
-#include "WireSlave.h"
+#include "Comunicacion/WireSlave.h"
 
 TwoWireSlave::TwoWireSlave(uint8_t bus_num)
     :num(bus_num & 1)
