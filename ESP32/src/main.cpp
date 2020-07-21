@@ -6,7 +6,7 @@ CAN_r Com;
 uint8_t Pack[150];
 float x=0.000;
 
-void static ReceiveData(_Medicion);
+void static ReceiveData(_Medicion, uint8_t);
 
 static void LedBlink(void * parameter){
   pinMode(25,OUTPUT);
@@ -44,8 +44,8 @@ void loop()
 {  
 }
 
-void ReceiveData(_Medicion Data){
-  Serial.print("Mean =   "); Serial.println(Data.mean,4);
+void ReceiveData(_Medicion Data, uint8_t id){
+  Serial.print("id =   "); Serial.print(id); Serial.print("         Mean =   "); Serial.println(Data.mean,4);
 }
 
 

@@ -27,7 +27,7 @@ class Pack_CAN_r
         uint8_t set_Pack(_Medicion val, uint8_t *pack);
 
         void set_id(uint8_t id);
-        bool Get_Medicion(uint8_t *trama, _Medicion *data, uint8_t length);
+        bool Get_Medicion(uint8_t *trama, _Medicion *data, uint8_t *id,uint8_t length);
 
         uint8_t crc(uint8_t *val,uint8_t length);
 
@@ -35,7 +35,7 @@ class Pack_CAN_r
     private:
     
         uint8_t _id;
-        
+
         enum type_dato{__uint8_t_,__uint16_t_,__uint32_t_,__uint64_t_,__float_,__double_,__char_,__Medicion_};
 
         struct _tag_uint8_t{

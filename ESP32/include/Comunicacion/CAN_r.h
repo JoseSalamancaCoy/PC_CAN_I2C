@@ -18,7 +18,7 @@ private:
     uint8_t ReadAll(uint8_t *_pack_r,uint8_t len);
     void unPack(uint8_t *init, uint8_t _length, uint8_t uinit);
 
-    void (*user_onReceive)(_Medicion);
+    void (*user_onReceive)(_Medicion, uint8_t);
     
 
 public:
@@ -42,7 +42,7 @@ public:
     void GetData(uint8_t howMany);
 
 
-    void onReceive(void (*)(_Medicion));
+    void onReceive(void (*)(_Medicion, uint8_t));
     
 
 };

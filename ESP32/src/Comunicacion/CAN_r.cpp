@@ -138,16 +138,20 @@ uint8_t CAN_r::ReadAll(uint8_t *_pack_r,uint8_t len){
   while(WireSlave.available()) // loop through all but the last
   {
     *_pack_r = (uint8_t) WireSlave.read();    // receive byte as an integer
+    Serial.print(*_pack_r);
+    Serial.print(" ");
     len++;
     _pack_r++;
   }
+  Serial.println("");
   return len;
 }
 void CAN_r::unPack(uint8_t *init, uint8_t _length, uint8_t uinit){
     _Medicion Data;
-    bool dataok = Get_Medicion(init, &Data, _length); //Obtiene Dato
+    uint8_t id;
+    bool dataok = Get_Medicion(init, &Data, &id, _length); //Obtiene Dato
     if(dataok){
-        user_onReceive(Data); //Evento de newData
+        user_onReceive(Data, id); //Evento de newData
     }
 }
 
@@ -185,7 +189,7 @@ void CAN_r::GetData(uint8_t howMany){
   len=0;
 }
 
-void CAN_r::onReceive(void (*function)(_Medicion))
+void CAN_r::onReceive(void (*function)(_Medicion, uint8_t))
 {
     user_onReceive = function;
 }

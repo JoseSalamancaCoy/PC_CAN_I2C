@@ -150,7 +150,7 @@ void Pack_CAN_r::set_id(uint8_t id){
     _id= id;
 }
 
- bool Pack_CAN_r::Get_Medicion(uint8_t *_trama, _Medicion *data, uint8_t lengt){
+ bool Pack_CAN_r::Get_Medicion(uint8_t *_trama, _Medicion *data, uint8_t *id, uint8_t lengt){
     _tag_Data trama;
     uint8_t *_pinit = _trama;
     uint8_t *_pack;
@@ -160,6 +160,7 @@ void Pack_CAN_r::set_id(uint8_t id){
 
     if(trama._crc == crc(_pinit,lengt-2)){
         *data = trama._data;
+        *id = trama._id;
         return true;
     }
     else{

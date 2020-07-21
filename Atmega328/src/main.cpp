@@ -9,7 +9,7 @@ CAN_r Com;
 bool Timeout;
 
 
-void static ReceiveData(_Medicion);
+void static ReceiveData(_Medicion, uint8_t);
 
 void IRQ_interrup(){
     Timeout = true;
@@ -42,6 +42,6 @@ void loop()
 }
 
 
-void ReceiveData(_Medicion Data){
-  Serial.print("Mean =   "); Serial.println(Data.mean,4);
+void ReceiveData(_Medicion Data, uint8_t id){
+  Serial.print("id =   "); Serial.print(id); Serial.print("     Mean =   "); Serial.println(Data.mean,4);
 }
