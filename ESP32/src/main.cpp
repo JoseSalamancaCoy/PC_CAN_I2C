@@ -2,10 +2,11 @@
 #include <Wire.h>
 #include "WireSlave.h"
 #include "CAN_r.h"
-
+#include "Common.h"
 
 CAN_r Com;
 uint8_t Pack[150];
+float x=0.000;
 
 void static ReceiveData(_Medicion);
 
@@ -24,14 +25,11 @@ static void Comunication(void * parameter){
   Com.onReceive(ReceiveData);
   Com.Init_Slave();
   vTaskDelay(250); 
-  for(;;){
-    Com.End_Slave();
-    Com.Init_Master();  
-    Com.send(10.5,11.2,0.12,0.001);
-    Com.End_Master();
-    Com.Init_Slave();
+  for(;;){ 
+    Com.send(x,11.2,0.12,0.001,10);
+    x+=0.001;
     Com.Update();
-    vTaskDelay(100); 
+    vTaskDelay(1000); 
   }
 }
 

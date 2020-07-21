@@ -9,58 +9,102 @@ CAN_r::~CAN_r()
 
 }
 
-void CAN_r::send(uint8_t val)
-{
+void CAN_r::send(uint8_t val, uint8_t id){
+  Update();
+  End_Slave();
+  Init_Master(); 
+  set_id(id);
   len = set_Pack(val, &Pack[0]);
   Wire.beginTransmission(_port_I2C); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
+  End_Master();
+  Init_Slave();
 }
 
-void CAN_r::send(uint16_t val){
+void CAN_r::send(uint16_t val, uint8_t id){
+  Update();
+  End_Slave();
+  Init_Master(); 
+  set_id(id);
   len = set_Pack(val, &Pack[0]);
   Wire.beginTransmission(_port_I2C); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
+  End_Master();
+  Init_Slave();
 }
 
-void CAN_r::send(uint32_t val){
+void CAN_r::send(uint32_t val, uint8_t id){
+  Update();
+  End_Slave();
+  Init_Master(); 
+  set_id(id);
   len = set_Pack(val, &Pack[0]);
   Wire.beginTransmission(_port_I2C); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
+  End_Master();
+  Init_Slave();
 }
 
-void CAN_r::send(uint64_t val){
+void CAN_r::send(uint64_t val, uint8_t id){
+  Update();
+  End_Slave();
+  Init_Master(); 
+  set_id(id);
   len = set_Pack(val, &Pack[0]);
   Wire.beginTransmission(_port_I2C); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
+  End_Master();
+  Init_Slave();
 }
 
-void CAN_r::send(float val){
+void CAN_r::send(float val, uint8_t id){
+  Update();
+  End_Slave();
+  Init_Master(); 
+  set_id(id);
   len = set_Pack(val, &Pack[0]);
   Wire.beginTransmission(_port_I2C); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
+  End_Master();
+  Init_Slave();
 }
 
-void CAN_r::send(float mean, float max, float min, float desv){
+void CAN_r::send(float mean, float max, float min, float desv, uint8_t id){
+  Update();
+  End_Slave();
+  Init_Master(); 
+  set_id(id);
   len = set_Pack(mean,max,min,desv, &Pack[0]);
   Wire.beginTransmission(_port_I2C); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
+  End_Master();
+  Init_Slave();
 }
 
-void CAN_r::send(_Medicion val){
-
-
+void CAN_r::send(_Medicion val, uint8_t id){
+  Update();
+  End_Slave();
+  Init_Master(); 
+  set_id(id);
   len = set_Pack(val, &Pack[0]);
   Wire.beginTransmission(_port_I2C); // transmit to device #4
   Wire.write(&Pack[0], len) ;         // sends one byte  
   Wire.endTransmission();    // stop transmitting
+  End_Master();
+  Init_Slave();
 }
 
+
+void CAN_r::End_Slave(){
+  WireSlave.update();
+  WireSlave.loose();
+}
 
 void CAN_r::Init_Master(){
 
@@ -70,6 +114,11 @@ void CAN_r::Init_Master(){
 void CAN_r::End_Master(){
   Wire.loose();
 }
+void CAN_r::Update(){
+    WireSlave.update();
+}
+
+
 
 void CAN_r::Init_Slave(){
   bool success = WireSlave.begin(SDA_PIN, SCL_PIN, _port_I2C);
@@ -79,14 +128,7 @@ void CAN_r::Init_Slave(){
   }
   WireSlave.onReceive(receiveEvent);
 }
-void CAN_r::Update(){
-    WireSlave.update();
-}
 
-void CAN_r::End_Slave(){
-  WireSlave.update();
-  WireSlave.loose();
-}
 
 
 uint8_t CAN_r::ReadAll(uint8_t *_pack_r,uint8_t len){

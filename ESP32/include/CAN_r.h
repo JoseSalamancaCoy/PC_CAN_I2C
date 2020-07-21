@@ -24,19 +24,19 @@ private:
 public:
     CAN_r();
     ~CAN_r();
-    void send(uint8_t val);
-    void send(uint16_t val);
-    void send(uint32_t val);
-    void send(uint64_t val);
-    void send(float val);
-    void send(float mean, float max, float min, float desv);
-    void send(_Medicion val);
+    void send(uint8_t val, uint8_t id);
+    void send(uint16_t val, uint8_t id);
+    void send(uint32_t val, uint8_t id);
+    void send(uint64_t val, uint8_t id);
+    void send(float val, uint8_t id);
+    void send(float mean, float max, float min, float desv, uint8_t id);
+    void send(_Medicion val, uint8_t id);
 
     void Update();
 
     void Init_Master();
     void End_Master();
-    void static Init_Slave();
+    void Init_Slave();
     void End_Slave();
     void GetData(uint8_t howMany);
 

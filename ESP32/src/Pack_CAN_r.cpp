@@ -149,6 +149,10 @@ uint8_t Pack_CAN_r::set_Pack(_Medicion val, uint8_t *pack){
     return trama._lengt; // Retorna la longitud del vector
 }
 
+void Pack_CAN_r::set_id(uint8_t id){
+    _id= id;
+}
+
  bool Pack_CAN_r::Get_Medicion(uint8_t *_trama, _Medicion *data, uint8_t lengt){
     _tag_Data trama;
     uint8_t *_pinit = _trama;
