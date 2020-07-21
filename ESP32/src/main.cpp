@@ -19,9 +19,9 @@ static void LedBlink(void * parameter){
 }
 static void Comunication(void * parameter){
   Serial.println("Comunicacion");
-  Com.begin(3);
+  Com.begin();
   Com.onReceive(ReceiveData);
-  Com.Init_Slave();
+  
   vTaskDelay(250); 
   for(;;){ 
     Com.send(x,11.2,0.12,0.001,10);

@@ -24,6 +24,7 @@ private:
 public:
     CAN_r();
     ~CAN_r();
+    void begin();
     void send(uint8_t val, uint8_t id);
     void send(uint16_t val, uint8_t id);
     void send(uint32_t val, uint8_t id);

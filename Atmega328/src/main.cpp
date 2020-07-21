@@ -20,8 +20,7 @@ void setup()
 {
   Serial.begin(115200);           // start serial for output
   Serial.println("Init atmega328");
-  Com.begin(5);
-  Com.Init_Slave();
+  Com.begin();  
   Com.onReceive(ReceiveData);
 
   Timer1.initialize(1100000);
@@ -34,7 +33,7 @@ void loop()
     Timeout = false;
     
     x+=0.001;
-    Com.send(x,11.2,0.12,0.001,10);
+    Com.send(x,11.2,0.12,0.001,pm10_1);
     
   }
    //if(Timeout){Timeout = false; Serial.println("ok");} 

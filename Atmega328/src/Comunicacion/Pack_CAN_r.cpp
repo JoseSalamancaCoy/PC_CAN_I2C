@@ -9,10 +9,6 @@ Pack_CAN_r::~Pack_CAN_r()
 {
 }
 
-void Pack_CAN_r::begin(uint8_t id)
-{
-    _id = id;
-}
 
 uint8_t Pack_CAN_r::crc(uint8_t *data, uint8_t length) {
         uint8_t crc = 0;
@@ -150,7 +146,7 @@ uint8_t Pack_CAN_r::set_Pack(_Medicion val, uint8_t *pack){
     return trama._lengt; // Retorna la longitud del vector
 }
 
-uint8_t Pack_CAN_r::set_id(uint8_t id){
+void Pack_CAN_r::set_id(uint8_t id){
     _id = id;
 }
 

@@ -8,6 +8,9 @@ CAN_r::~CAN_r()
 {
 
 }
+void CAN_r::begin(){
+  Init_Slave();
+}
 
 void CAN_r::send(uint8_t val, uint8_t id){
   Update();

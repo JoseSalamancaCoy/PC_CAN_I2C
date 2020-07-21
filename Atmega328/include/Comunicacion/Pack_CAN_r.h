@@ -16,7 +16,7 @@ class Pack_CAN_r
     public:
         Pack_CAN_r();
         ~Pack_CAN_r();
-        void begin(uint8_t id);
+        
         uint8_t set_Pack(uint8_t val, uint8_t *pack);
         uint8_t set_Pack(uint16_t val, uint8_t *pack);
         uint8_t set_Pack(uint32_t val, uint8_t *pack);
@@ -26,13 +26,16 @@ class Pack_CAN_r
         uint8_t set_Pack(float mean, float max, float min, float desv, uint8_t *pack);
         uint8_t set_Pack(_Medicion val, uint8_t *pack);
 
-        uint8_t set_id(uint8_t id);
+        void set_id(uint8_t id);
         bool Get_Medicion(uint8_t *trama, _Medicion *data, uint8_t length);
 
         uint8_t crc(uint8_t *val,uint8_t length);
 
 
     private:
+    
+        uint8_t _id;
+        
         enum type_dato{__uint8_t_,__uint16_t_,__uint32_t_,__uint64_t_,__float_,__double_,__char_,__Medicion_};
 
         struct _tag_uint8_t{
@@ -107,5 +110,4 @@ class Pack_CAN_r
             uint8_t _crc;
             uint8_t _end = byte_end_data;
         };
-        uint8_t _id;
 };

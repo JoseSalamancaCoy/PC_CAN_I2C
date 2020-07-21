@@ -16,7 +16,6 @@ class Pack_CAN_r
     public:
         Pack_CAN_r();
         ~Pack_CAN_r();
-        void begin(uint8_t id);
         uint8_t set_Pack(uint8_t val, uint8_t *pack);
         uint8_t set_Pack(uint16_t val, uint8_t *pack);
         uint8_t set_Pack(uint32_t val, uint8_t *pack);
