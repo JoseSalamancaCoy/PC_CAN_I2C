@@ -146,7 +146,7 @@ void CAN_r::unPack(uint8_t *init, uint8_t _length, uint8_t uinit){
 void CAN_r::GetData(uint8_t howMany){
   //Llenado de buffer
   static uint8_t len;
-  static uint8_t Pack_r[255];
+  static uint8_t Pack_r[BUFFER_LENGTH];
   uint8_t *_pack_r = &Pack_r[len];
   len = ReadAll(_pack_r, len);  
   // uinit posicion relativa y supuesta de inicio de trama
@@ -171,7 +171,7 @@ void CAN_r::GetData(uint8_t howMany){
 
   }
   //Reinicia referencias y buffer
-  for(uint8_t i =0; i<255;i++){ Pack_r[i] = 0; }  //Limpia buffer
+  for(uint8_t i =0; i<BUFFER_LENGTH;i++){ Pack_r[i] = 0; }  //Limpia buffer
   len=0;
 }
 
