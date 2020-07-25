@@ -4,13 +4,13 @@
 
 
 #define _port_I2C 4
-void static receiveEvent(int howMany);
+void receiveEvent(int howMany);
 
 
 class CAN_r: public Pack_CAN_r
 {
 private: 
-    uint8_t Pack[255];
+    uint8_t Pack[BUFFER_LENGTH];
     uint8_t len;
 
     void Init_Master();

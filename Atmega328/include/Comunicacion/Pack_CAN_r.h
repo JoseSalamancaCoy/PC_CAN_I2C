@@ -1,15 +1,10 @@
 #include <Arduino.h>
-
+#include "Comunicacion/Common.h"
 
 #define byte_init_data 0x02
 #define byte_end_data 0x03
 
-struct _Medicion{ //Estructura para almacenar mediciones
-        float mean;
-        float max;
-        float min;
-        float desv;
-    };
+
 
 class Pack_CAN_r
 {

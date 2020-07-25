@@ -140,8 +140,6 @@ uint8_t CAN_r::ReadAll(uint8_t *_pack_r,uint8_t len){
   while(WireSlave.available()) // loop through all but the last
   {
     *_pack_r = (uint8_t) WireSlave.read();    // receive byte as an integer
-    Serial.print(*_pack_r);
-    Serial.print(" ");
     len++;
     _pack_r++;
   }
