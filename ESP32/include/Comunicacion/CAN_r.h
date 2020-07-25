@@ -7,7 +7,7 @@
 
 #define SDA_PIN 21
 #define SCL_PIN 22
-void static receiveEvent(int howMany);
+void receiveEvent(int howMany);
 
 
 class CAN_r : public Pack_CAN_r

@@ -18,9 +18,9 @@ enum id_Variable{
     __a=22,         __a_log=52,
     __lluvia=23,    __lluvia_log=53,
 
-    __V_bat=64,     __V_bat_log=94,
-    __V_Out=65,     __V_Out_log=95,
-    __V_In=66,      __V_In_log=96,
+    __V_Bat=64,     __V_Bat_log=94,
+    __V_Cargador=65,__V_Cargador_log=95,
+    __V_110=66,     __V_110_log=96,
     __V_Panel=67,   __V_Panel_log=97,
 
                     __Aire_log=40,
